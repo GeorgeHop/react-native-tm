@@ -1,0 +1,34 @@
+{
+  "name": "react-native-toast",
+  "version": "1.0.0",
+  "description": "Customizable toast component for react-native applications. Supported on ios and android.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GeorgeHop/react-native-toast.git"
+  },
+  "keywords": [
+    "react-native",
+    "react",
+    "native",
+    "expo",
+    "toast",
+    "component",
+    "toast-component",
+    "crossplatform",
+    "ios",
+    "android"
+  ],
+  "contributors": [
+    {
+      "name": "Mutovkin Yurii",
+      "email": "georgehopekek@gmail.com",
+      "url": "https://github.com/GeorgeHop"
+    }
+  ],
+  "author": "George Hope",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/GeorgeHop/react-native-toast/issues"
+  },
+  "homepage": "https://github.com/GeorgeHop/react-native-toast#readme"
+}
