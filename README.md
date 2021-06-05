@@ -1,6 +1,7 @@
 # react-native-toast
 Customizable toast component for react-native applications. Supported on ios and android.
 
+![ezgif com-gif-maker (8)](https://user-images.githubusercontent.com/47904385/120900240-1225d380-c634-11eb-9842-3aadf5902967.gif)
 
 # Installation
 expo: `expo install react-native-tm`  
