@@ -1,7 +1,7 @@
 import React, {forwardRef, useEffect, useRef} from "react";
 import {Animated, Easing, Text, TouchableOpacity, View} from "react-native";
 
-export const Toast = ({statusBarHeight, show, animationType, toastOnPress, style, children, showingDuration, withClose}) => {
+export default function Toast({statusBarHeight, show, animationType, toastOnPress, style, children, showingDuration, withClose}) {
     const toastContainerHeight = 150;
     const animationValue = toastContainerHeight + statusBarHeight || 180;
     const animatedValue = useRef(new Animated.Value(-animationValue)).current;
