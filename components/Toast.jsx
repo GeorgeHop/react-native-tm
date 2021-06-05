@@ -1,91 +1,74 @@
-import React, {forwardRef, useEffect} from "react";
-import {Text, TouchableOpacity, View} from "react-native";
-import shadowGenerator from "../../helpers/shadowGenerator";
-import useThemeStyles from "../../hooks/useThemeStyles";
-import Constants from "expo-constants";
-import {useDispatch, useSelector} from "react-redux";
-import {getTranslated} from "../../helpers/functions";
-import Animated, {
-    runOnJS,
-    useAnimatedStyle,
-    useSharedValue,
-    withDelay,
-    withSequence,
-    withSpring,
-} from 'react-native-reanimated';
-import Actions from "../../redux/Actions";
+import React, {forwardRef, useEffect, useRef} from "react";
+import {Animated, Easing, Text, TouchableOpacity, View} from "react-native";
 
-const toastContainerHeight = 150;
-
-export const Toast = forwardRef((props, ref) => {
-    const statusBarHeight = Constants.statusBarHeight;
-    const animationValue = toastContainerHeight + statusBarHeight;
-    const offset = useSharedValue(0);
-    const dispatch = useDispatch();
+export const Toast = ({statusBarHeight, show, animationType, toastOnPress, style, children, showingDuration, withClose}) => {
+    const toastContainerHeight = 150;
+    const animationValue = toastContainerHeight + statusBarHeight || 180;
+    const animatedValue = useRef(new Animated.Value(-animationValue)).current;
 
     useEffect(() => {
-        if (!!toast)
+        if (!!children && show)
             showToast()
-    },[toast]);
+    },[children, show]);
 
     const showToast = () => {
-        offset.value = withSequence(
-            withSpring(animationValue),
-            withDelay(6000, withSpring(-animationValue, {}, (finished) => {
-                if (finished)
-                    runOnJS(cleanup)();
-            })));
-    };
+        const animation =  {easing: animationType === 'bounce' ? Easing.bounce : animationType === 'elastic' ? Easing.elastic(1.7) : null}
 
-    const cleanup = () => dispatch(Actions.Toasts.Cleanup());
+        Animated.timing(animatedValue, {
+            toValue: 1,
+            duration: 550,
+            ...animation,
+            useNativeDriver: true
+        }).start(() => hideToast());
+    }
 
-    const defaultStyles = useAnimatedStyle(() => ({
-        transform: [{translateY: withSpring(offset.value - animationValue, {
-            damping: 20,
-            stiffness: 120,
-            mass: 1
-        })}],
-    }));
+    const hideToast = () => {
+        setTimeout(() => {
+            Animated.timing(animatedValue, {
+                toValue: -animationValue,
+                duration: 550,
+                useNativeDriver: true
+            }).start();
+        },showingDuration || 8000);
+    }
 
     return(
         <Animated.View
             style={[
                 styles.toastContainer,
-                defaultStyles,
                 {
-                    height: animationValue
-                },
+                    height: animationValue,
+                    transform: [{
+                        translateY: animatedValue
+                    }],
+                }
             ]}
         >
             <TouchableOpacity
                 style={[
-                    styles.toast,
-                    {
-                        backgroundColor: theme.main_bg,
-                        borderWidth: 5,
-                        borderColor: !!toast ? toast?.color : props?.toastColor || theme.main_bg
-                    }
+                    style?.toast || styles.toast,
                 ]}
                 onPress={() => {
-                    (offset.value = -animationValue)
-                    cleanup()
+                    !!toastOnPress && toastOnPress()
+
+                    if (withClose) {
+                        Animated.timing(animatedValue, {
+                            toValue: -animationValue,
+                            duration: 550,
+                            useNativeDriver: true
+                        }).start();
+                    }
                 }}
             >
-                <View style={{flex:1}}>
-                    <Text style={{
-                        textAlign: 'center',
-                        color: theme.dark_text
-                    }}>
-                        {getTranslated(toast?.message || props.message, locale)}
-                    </Text>
-                </View>
+                {children}
             </TouchableOpacity>
         </Animated.View>
     )
-});
+};
 
 const styles = {
     toastContainer: {
+        width: '100%',
         backgroundColor: 'transparent',
         position: 'absolute',
         zIndex: 99,
@@ -96,6 +79,7 @@ const styles = {
         justifyContent:  'flex-end'
     },
     toast: {
+        backgroundColor: 'white',
         padding: 20,
         marginVertical: 5,
         marginHorizontal: 8,
@@ -103,7 +87,15 @@ const styles = {
         alignItems: 'baseline',
         justifyContent: 'center',
         borderRadius: 10,
-        ...shadowGenerator(10)
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+
+        elevation: 5,
     },
     toastElement: {
         height: 25,
