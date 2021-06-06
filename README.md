@@ -1,4 +1,4 @@
-# react-native-toast
+# react-native-tm
 Customizable toast component for react-native applications. Supported on ios and android.
 
 ![ezgif com-gif-maker (8)](https://user-images.githubusercontent.com/47904385/120900240-1225d380-c634-11eb-9842-3aadf5902967.gif)
@@ -33,7 +33,7 @@ export default function YourComponent() {
 // more about customizing below
 ```
 
-### How customize your toast ? 
+## How customize your toast ? 
 ```JS
 import Toast from "react-native-tm";
 
@@ -77,6 +77,54 @@ export default function YourComponent() {
 
 ```
 
+## How customize your animation ? 
+
+By default toast use the linear animation, just show and hide nothing special. But if you want to change the animation type use description below.
+
+#### For bounce animation.
+
+<table>
+<tr>
+<td>
+
+```JS
+     <Toast
+        ...
+         // Add the animation type bounce
+        animationType={'bounce'}
+       ...
+      />
+```
+
+</td>
+<td>
+<img src="https://user-images.githubusercontent.com/47904385/120920413-edc30900-c6be-11eb-82bf-9aa5b31dd1c8.gif" alt="drawing" width="600" height="300"/>
+</td>
+</tr>
+</table>
+
+#### For elastic animation.
+
+<table>
+<tr>
+<td>
+
+```JS
+     <Toast
+        ...
+         // Add the animation type elastic
+        animationType={'elastic'}
+       ...
+      />
+```
+
+</td>
+<td>
+<img src="https://user-images.githubusercontent.com/47904385/120920546-9f623a00-c6bf-11eb-852e-867d40f3b65f.gif" alt="drawing" width="600" height="300"/>
+</td>
+</tr>
+</table>
+
 ## Props
 Below are the props you can pass to the React Component.
 
@@ -90,3 +138,9 @@ Below are the props you can pass to the React Component.
 | style | object | | {toast: {backgroundColor: 'black', height: 50}} | The styles object for styling the toast details. More about styling in Custom styling step.|
 | showingDuration | int | 8000 | showingDuration={3000} | How much time toast will show on the screen |
 | statusBarHeight | int | 180 | statusBarHeight={150} | If you have a specific status bar on your device you may want to pass this props to aware some UI bugs on the device |
+
+## ToDos
+
+1. TypeScript support.
+2. More animation for customizing.
+
