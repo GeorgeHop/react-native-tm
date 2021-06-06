@@ -1,11 +1,11 @@
 {
   "name": "react-native-tm",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": "Toast.jsx",
   "description": "Customizable toast component for react-native applications. Supported on ios and android.",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/GeorgeHop/react-native-toast.git"
+    "url": "git+https://github.com/GeorgeHop/react-native-tm.git"
   },
   "keywords": [
     "react-native",
@@ -29,7 +29,7 @@
   "author": "George Hope",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/GeorgeHop/react-native-toast/issues"
+    "url": "https://github.com/GeorgeHop/react-native-tm/issues"
   },
-  "homepage": "https://github.com/GeorgeHop/react-native-toast#readme"
+  "homepage": "https://github.com/GeorgeHop/react-native-tm#readme"
 }
