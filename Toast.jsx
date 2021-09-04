@@ -1,7 +1,7 @@
 import React, {forwardRef, useEffect, useRef} from "react";
 import {Animated, Easing, Text, TouchableOpacity, View} from "react-native";
 
-export default function Toast({statusBarHeight, show, animationType, toastOnPress, style, children, showingDuration, withClose}) {
+export default function Toast({statusBarHeight, show, animationType, toastOnPress, style, children, showingDuration, withClose, onHide}) {
     const toastContainerHeight = 150;
     const animationValue = toastContainerHeight + statusBarHeight || 180;
     const animatedValue = useRef(new Animated.Value(-animationValue)).current;
@@ -28,7 +28,7 @@ export default function Toast({statusBarHeight, show, animationType, toastOnPres
                 toValue: -animationValue,
                 duration: 550,
                 useNativeDriver: true
-            }).start();
+            }).start(() => onHide());
         },showingDuration || 8000);
     }
 
@@ -46,7 +46,8 @@ export default function Toast({statusBarHeight, show, animationType, toastOnPres
         >
             <TouchableOpacity
                 style={[
-                    style?.toast || styles.toast,
+                    style?.toast,
+                    styles.toast,
                 ]}
                 onPress={() => {
                     !!toastOnPress && toastOnPress()

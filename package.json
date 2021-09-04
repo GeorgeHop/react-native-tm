@@ -1,6 +1,6 @@
 {
   "name": "react-native-tm",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "main": "Toast.jsx",
   "description": "Customizable toast component for react-native applications. Supported on ios and android.",
   "repository": {
