@@ -46,8 +46,7 @@ export default function Toast({statusBarHeight, show, animationType, toastOnPres
         >
             <TouchableOpacity
                 style={[
-                    style?.toast,
-                    styles.toast,
+                    style?.toast || styles.toast,
                 ]}
                 onPress={() => {
                     !!toastOnPress && toastOnPress()
