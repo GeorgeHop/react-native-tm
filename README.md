@@ -1,5 +1,5 @@
 # react-native-tm
-:triangular_flag_on_post: Fully customizable toast component for your react-native applications supported on IOS and Android. Also you can use it with expo or pure react-native. :triangular_flag_on_post:
+Fully customizable toast component for your react-native applications supported on IOS and Android. Also you can use it with expo or pure react-native. 
 
 ![ezgif com-gif-maker (8)](https://user-images.githubusercontent.com/47904385/120900240-1225d380-c634-11eb-9842-3aadf5902967.gif)
 
