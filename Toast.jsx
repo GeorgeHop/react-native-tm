@@ -23,13 +23,16 @@ export default function Toast({statusBarHeight, show, animationType, toastOnPres
     }
 
     const hideToast = () => {
-        setTimeout(() => {
+        let timerID = setTimeout(() => {
             Animated.timing(animatedValue, {
                 toValue: -animationValue,
                 duration: 550,
                 useNativeDriver: true
-            }).start(() => onHide());
-        },showingDuration || 8000);
+            }).start(() => {
+                clearTimeout(timerID);
+                !!onHide && onHide();
+            });
+        }, showingDuration || 8000);
     }
 
     return(
