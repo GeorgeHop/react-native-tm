@@ -1,5 +1,5 @@
 # react-native-tm
-Customizable toast component for react-native applications. Supported on ios and android.
+Fully customizable toast component for your react-native applications supported on IOS and Android. Also you can use it with expo or pure react-native. 
 
 ![ezgif com-gif-maker (8)](https://user-images.githubusercontent.com/47904385/120900240-1225d380-c634-11eb-9842-3aadf5902967.gif)
 
@@ -13,7 +13,6 @@ yarn: `yarn add react-native-tm`
 import Toast from "react-native-tm";
 
 export default function YourComponent() {
-   
    return(
       <YourComponentsHere></YourComponentsHere>
       <Toast
@@ -138,6 +137,7 @@ Below are the props you can pass to the React Component.
 | style | object | | {toast: {backgroundColor: 'black', height: 50}} | The styles object for styling the toast details. More about styling in Custom styling step.|
 | showingDuration | int | 8000 | showingDuration={3000} | How much time toast will show on the screen |
 | statusBarHeight | int | 180 | statusBarHeight={150} | If you have a specific status bar on your device you may want to pass this props to aware some UI bugs on the device |
+| onHide  | function | | onHide={() => yourFunctionToDoSomething()} | Function which call when toast hiding. |
 
 ## ToDos
 
