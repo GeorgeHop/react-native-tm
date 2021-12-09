@@ -5,6 +5,7 @@ export default function Toast({statusBarHeight, show, animationType, toastOnPres
     const toastContainerHeight = 150;
     const animationValue = toastContainerHeight + statusBarHeight || 180;
     const animatedValue = useRef(new Animated.Value(-animationValue)).current;
+    const timer = useRef(null);
 
     useEffect(() => {
         if (!!children && show)
@@ -23,13 +24,13 @@ export default function Toast({statusBarHeight, show, animationType, toastOnPres
     }
 
     const hideToast = () => {
-        let timerID = setTimeout(() => {
+        clearTimeout(timer.current);
+        timer.current = setTimeout(() => {
             Animated.timing(animatedValue, {
                 toValue: -animationValue,
                 duration: 550,
                 useNativeDriver: true
             }).start(() => {
-                clearTimeout(timerID);
                 !!onHide && onHide();
             });
         }, showingDuration || 8000);
