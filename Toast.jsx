@@ -8,8 +8,11 @@ export default function Toast({statusBarHeight, show, animationType, toastOnPres
     const timer = useRef(null);
 
     useEffect(() => {
-        if (!!children && show)
-            showToast()
+        if (!!children && show) {
+            showToast();
+        } else {
+            hide();
+        }
     },[children, show]);
 
     const showToast = () => {
@@ -20,21 +23,25 @@ export default function Toast({statusBarHeight, show, animationType, toastOnPres
             duration: 550,
             ...animation,
             useNativeDriver: true
-        }).start(() => hideToast());
-    }
+        }).start(() => timeoutHide());
+    };
 
-    const hideToast = () => {
+    const timeoutHide = () => {
         clearTimeout(timer.current);
         timer.current = setTimeout(() => {
-            Animated.timing(animatedValue, {
-                toValue: -animationValue,
-                duration: 550,
-                useNativeDriver: true
-            }).start(() => {
-                !!onHide && onHide();
-            });
+            hide();
         }, showingDuration || 8000);
-    }
+    };
+
+    const hide = () => {
+        Animated.timing(animatedValue, {
+            toValue: -animationValue,
+            duration: 550,
+            useNativeDriver: true
+        }).start(() => {
+            !!onHide && onHide();
+        });
+    };
 
     return(
         <Animated.View
